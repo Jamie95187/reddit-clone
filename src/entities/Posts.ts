@@ -3,7 +3,7 @@ import { Entity, PrimaryKey, Property } from "@mikro-orm/core";
 @Entity()
 export class Post {
   @PrimaryKey()
-  _id!: ObjectId;
+  _id!: number;
 
   @Property()
   createdAt: Date = new Date();
