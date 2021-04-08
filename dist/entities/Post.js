@@ -23,11 +23,11 @@ __decorate([
 ], Post.prototype, "_id", void 0);
 __decorate([
     core_1.Property({ type: "date" }),
-    __metadata("design:type", Date)
+    __metadata("design:type", Object)
 ], Post.prototype, "createdAt", void 0);
 __decorate([
     core_1.Property({ type: "date", onUpdate: () => new Date() }),
-    __metadata("design:type", Date)
+    __metadata("design:type", Object)
 ], Post.prototype, "updatedAt", void 0);
 __decorate([
     core_1.Property({ type: "text" }),

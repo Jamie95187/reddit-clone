@@ -1,18 +1,21 @@
-import { MikroORM } from "@mikro-orm/core";
-import { __prod__ } from "./constants";
-import { Post } from "./entities/Post";
-import microConfig from './mikro-orm.config';
+import "reflect-metadata";
+import {createConnection} from "typeorm";
+import {User} from "./entity/User";
 
-const main = async () => {
-  const orm = await MikroORM.init(microConfig);
+createConnection().then(async connection => {
 
-  // Run migrations before anything else
-  await orm.getMigrator().up();
-  const post = orm.em.create(Post, {title: "my first post"});
-  await orm.em.persistAndFlush(post);
+    console.log("Inserting a new user into the database...");
+    const user = new User();
+    user.firstName = "Timber";
+    user.lastName = "Saw";
+    user.age = 25;
+    await connection.manager.save(user);
+    console.log("Saved a new user with id: " + user.id);
 
-};
+    console.log("Loading users from the database...");
+    const users = await connection.manager.find(User);
+    console.log("Loaded users: ", users);
 
-main().catch((err) => {
-  console.error(err);
-});
+    console.log("Here you can setup and run express/koa/any other framework.");
+
+}).catch(error => console.log(error));

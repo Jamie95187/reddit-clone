@@ -1,34 +1,37 @@
 {
-  "name": "REDDIT-SERVER",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "dev": "nodemon dist/index.js",
-    "start2": "ts-node src/index.ts",
-    "start": "node dist/index.js",
-    "watch": "tsc -w"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "@types/node": "^14.14.37",
-    "ts-node": "^9.1.1",
-    "typescript": "^4.2.3"
-  },
-  "dependencies": {
-    "@mikro-orm/cli": "^4.5.2",
-    "@mikro-orm/core": "^4.5.1",
-    "@mikro-orm/migrations": "^4.5.1",
-    "@mikro-orm/postgresql": "^4.5.1",
-    "pg": "^8.5.1"
-  },
-  "mikro-orm": {
-    "userTsNode": true,
-    "configPaths": [
-      "./src/mikro-orm.config.ts",
-      "./dist/mikro-orm.config.js"
-    ]
-  }
+   "name": "REDDIT-SERVER",
+   "version": "1.0.0",
+   "description": "",
+   "main": "index.js",
+   "scripts": {
+      "dev": "nodemon dist/index.js",
+      "start2": "ts-node src/index.ts",
+      "start": "ts-node src/index.ts",
+      "watch": "tsc -w"
+   },
+   "keywords": [],
+   "author": "",
+   "license": "ISC",
+   "devDependencies": {
+      "@types/node": "^8.0.29",
+      "ts-node": "3.3.0",
+      "typescript": "3.3.3333"
+   },
+   "dependencies": {
+      "@mikro-orm/cli": "^4.5.2",
+      "@mikro-orm/core": "^4.5.1",
+      "@mikro-orm/migrations": "^4.5.1",
+      "@mikro-orm/postgresql": "^4.5.1",
+      "pg": "^8.5.1",
+      "reflect-metadata": "^0.1.10",
+      "typeorm": "0.2.32",
+      "mysql": "^2.14.1"
+   },
+   "mikro-orm": {
+      "userTsNode": true,
+      "configPaths": [
+         "./src/mikro-orm.config.ts",
+         "./dist/mikro-orm.config.js"
+      ]
+   }
 }
