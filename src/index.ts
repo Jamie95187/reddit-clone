@@ -1,7 +1,9 @@
 import "reflect-metadata";
-import {createConnection} from "typeorm";
-import {User} from "./entity/User";
+import { createConnection, QueryRunner } from "typeorm";
 
 async () => {
-     const connection = await createConnection()
+     const connection = await createConnection();
+     const queryRunner: QueryRunner = connection.createQueryRunner();
+
+     await queryRunner.connect();
 };
