@@ -13,5 +13,5 @@ export class Post {
 
   @Column({ type: "text" })
   title!: string;
-  
+
 }
