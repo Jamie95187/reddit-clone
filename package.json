@@ -1,30 +1,20 @@
 {
-   "name": "REDDIT-SERVER",
-   "version": "1.0.0",
-   "description": "",
-   "main": "index.js",
-   "type": "module",
-   "scripts": {
-      "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
-      "dev": "nodemon dist/index.js",
-      "start2": "ts-node src/index.ts",
-      "start": "ts-node src/index.ts",
-      "watch": "tsc -w",
-      "clean": "rimraf dist"
-   },
-   "keywords": [],
-   "author": "",
-   "licennpm e": "ISC",
-   "devDependencies": {
-      "@types/node": "^8.0.29",
-      "ts-node": "3.3.0",
-      "tsconfig-paths": "^3.9.0",
-      "typescript": "^4.2.4"
-   },
-   "dependencies": {
-      "mysql": "^2.14.1",
-      "pg": "^8.5.1",
-      "reflect-metadata": "^0.1.10",
-      "typeorm": "^0.2.32"
-   }
+  "name": "REDDIT-SERVER",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jamie95187/reddit-clone.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jamie95187/reddit-clone/issues"
+  },
+  "homepage": "https://github.com/Jamie95187/reddit-clone#readme"
 }
