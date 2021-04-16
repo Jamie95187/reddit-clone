@@ -1,4 +1,4 @@
-import {Entity, PrimaryGeneratedColumn, Column} from "typeorm";
+import {Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn} from "typeorm";
 
 @Entity()
 export class Post {
@@ -6,13 +6,13 @@ export class Post {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column()
-    createdAt: new Date();
+    @CreateDateColumn()
+    create_at: Date;
+
+    @UpdateDateColumn()
+    update_at: Date;
 
     @Column()
-    updatedAt: new Date();
-
-    @Column()
-    title!: string;
+    title: string;
 
 }
