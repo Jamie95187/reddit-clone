@@ -2,6 +2,9 @@ import "reflect-metadata";
 import {createConnection} from "typeorm";
 import {Post} from "./entity/Post";
 
+// Unlike mikroOrm, the createConnection function automatically finds the ormconfig.json file as long as it is
+// near the package.json (root directory)
+
 createConnection().then(async connection => {
 
     console.log("Inserting a new post into the database...");
