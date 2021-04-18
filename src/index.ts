@@ -23,7 +23,7 @@ createConnection().then(async connection => {
       res.send("hello");
     })
     app.listen(3030, () => {
-      console.log('sever started on localhost:3030')
+      console.log('server started on localhost:3030')
     })
 
 }).catch(error => console.log(error));

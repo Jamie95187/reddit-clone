@@ -65,7 +65,7 @@ typeorm_1.createConnection().then(function (connection) { return __awaiter(_this
                     res.send("hello");
                 });
                 app.listen(3030, function () {
-                    console.log('sever started on localhost:3030');
+                    console.log('server started on localhost:3030');
                 });
                 return [2];
         }
