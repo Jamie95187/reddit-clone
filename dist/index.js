@@ -43,29 +43,39 @@ require("reflect-metadata");
 var typeorm_1 = require("typeorm");
 var Post_1 = require("./entity/Post");
 var express_1 = __importDefault(require("express"));
+var apollo_server_express_1 = require("apollo-server-express");
+var type_graphql_1 = require("type-graphql");
+var hello_1 = require("./resolvers/hello");
 typeorm_1.createConnection().then(function (connection) { return __awaiter(_this, void 0, void 0, function () {
-    var post, posts, app;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
+    var post, posts, app, apolloServer, _a, _b;
+    return __generator(this, function (_c) {
+        switch (_c.label) {
             case 0:
                 console.log("Inserting a new post into the database...");
                 post = new Post_1.Post();
                 post.title = "First Post";
                 return [4, connection.manager.save(post)];
             case 1:
-                _a.sent();
+                _c.sent();
                 console.log("Saved a new post with id: " + post.id);
                 console.log("Loading posts from the database...");
                 return [4, connection.manager.find(Post_1.Post)];
             case 2:
-                posts = _a.sent();
+                posts = _c.sent();
                 console.log("Loaded users: ", posts);
                 app = express_1.default();
-                app.get('/', function (_, res) {
-                    res.send("hello");
-                });
-                app.listen(3030, function () {
-                    console.log('server started on localhost:3030');
+                _a = apollo_server_express_1.ApolloServer.bind;
+                _b = {};
+                return [4, type_graphql_1.buildSchema({
+                        resolvers: [hello_1.HelloResolver],
+                        validation: false
+                    })];
+            case 3:
+                apolloServer = new (_a.apply(apollo_server_express_1.ApolloServer, [void 0, (_b.schema = _c.sent(),
+                        _b)]))();
+                apolloServer.applyMiddleware({ app: app });
+                app.listen(8080, function () {
+                    console.log('server started on localhost:8080');
                 });
                 return [2];
         }
