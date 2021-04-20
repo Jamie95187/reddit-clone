@@ -1,3 +1,5 @@
+import { EntityManager, IDatabaseDriver, Connection } from "typeorm";
+
 export type MyContext {
-  em: Entitymanager<any> & EntityManager<IDatabaseDriver<connection>>
+  em: EntityManager<any> & EntityManager<IDatabaseDriver<Connection>>
 }
