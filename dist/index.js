@@ -46,6 +46,7 @@ var express_1 = __importDefault(require("express"));
 var apollo_server_express_1 = require("apollo-server-express");
 var type_graphql_1 = require("type-graphql");
 var hello_1 = require("./resolvers/hello");
+var post_1 = require("./resolvers/post");
 typeorm_1.createConnection().then(function (connection) { return __awaiter(_this, void 0, void 0, function () {
     var post, posts, app, apolloServer, _a, _b;
     return __generator(this, function (_c) {
@@ -67,11 +68,12 @@ typeorm_1.createConnection().then(function (connection) { return __awaiter(_this
                 _a = apollo_server_express_1.ApolloServer.bind;
                 _b = {};
                 return [4, type_graphql_1.buildSchema({
-                        resolvers: [hello_1.HelloResolver],
+                        resolvers: [hello_1.HelloResolver, post_1.PostResolver],
                         validation: false
                     })];
             case 3:
                 apolloServer = new (_a.apply(apollo_server_express_1.ApolloServer, [void 0, (_b.schema = _c.sent(),
+                        _b.context = function () { return ({ posts: posts }); },
                         _b)]))();
                 apolloServer.applyMiddleware({ app: app });
                 app.listen(8080, function () {

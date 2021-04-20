@@ -10,26 +10,32 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var typeorm_1 = require("typeorm");
+var type_graphql_1 = require("type-graphql");
 var Post = (function () {
     function Post() {
     }
     __decorate([
+        type_graphql_1.Field(),
         typeorm_1.PrimaryGeneratedColumn(),
         __metadata("design:type", Number)
     ], Post.prototype, "id", void 0);
     __decorate([
+        type_graphql_1.Field(function () { return String; }),
         typeorm_1.CreateDateColumn(),
         __metadata("design:type", Date)
     ], Post.prototype, "create_at", void 0);
     __decorate([
+        type_graphql_1.Field(function () { return String; }),
         typeorm_1.UpdateDateColumn(),
         __metadata("design:type", Date)
     ], Post.prototype, "update_at", void 0);
     __decorate([
+        type_graphql_1.Field(),
         typeorm_1.Column(),
         __metadata("design:type", String)
     ], Post.prototype, "title", void 0);
     Post = __decorate([
+        ObjectType(),
         typeorm_1.Entity()
     ], Post);
     return Post;
