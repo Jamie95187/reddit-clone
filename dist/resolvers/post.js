@@ -15,26 +15,22 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var type_graphql_1 = require("type-graphql");
-var Post_1 = __importDefault(require("../entity/Post"));
-var PostResolver = (function () {
-    function PostResolver() {
-    }
-    PostResolver.prototype.posts = function (_a) {
-        var em = _a.em;
+const type_graphql_1 = require("type-graphql");
+const Post_1 = __importDefault(require("../entity/Post"));
+let PostResolver = class PostResolver {
+    posts({ em }) {
         return em.find(Post_1.default, {});
-    };
-    __decorate([
-        type_graphql_1.Query(function () { return [Post_1.default]; }),
-        __param(0, type_graphql_1.Ctx()),
-        __metadata("design:type", Function),
-        __metadata("design:paramtypes", [Object]),
-        __metadata("design:returntype", Promise)
-    ], PostResolver.prototype, "posts", null);
-    PostResolver = __decorate([
-        type_graphql_1.Resolver()
-    ], PostResolver);
-    return PostResolver;
-}());
+    }
+};
+__decorate([
+    type_graphql_1.Query(() => [Post_1.default]),
+    __param(0, type_graphql_1.Ctx()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], PostResolver.prototype, "posts", null);
+PostResolver = __decorate([
+    type_graphql_1.Resolver()
+], PostResolver);
 exports.PostResolver = PostResolver;
 //# sourceMappingURL=post.js.map
