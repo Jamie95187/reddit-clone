@@ -1,24 +1,24 @@
-import {Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn} from "typeorm";
-import { ObjectType, Field } from "type-graphql";
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from "typeorm";
+// import { ObjectType, Field } from "type-graphql";
 
 // Declare object tyep when using with graphql
-@ObjectType()
+// @ObjectType()
 @Entity()
 export class Post {
 
-    @Field()
+    // @Field()
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Field(() => String)
+    // @Field(() => String)
     @CreateDateColumn()
     create_at: Date;
 
-    @Field(() => String)
+    // @Field(() => String)
     @UpdateDateColumn()
     update_at: Date;
 
-    @Field()
+    // @Field()
     @Column()
     title: string;
 
