@@ -1,16 +1,12 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
+const tslib_1 = require("tslib");
 require("reflect-metadata");
 const typeorm_1 = require("typeorm");
 const Post_1 = require("./entity/Post");
-const express_1 = __importDefault(require("express"));
+const express_1 = tslib_1.__importDefault(require("express"));
 const apollo_server_express_1 = require("apollo-server-express");
 const type_graphql_1 = require("type-graphql");
-const hello_1 = require("./resolvers/hello");
-const post_1 = require("./resolvers/post");
 typeorm_1.createConnection().then(async (connection) => {
     console.log("Inserting a new post into the database...");
     const post = new Post_1.Post();
@@ -23,7 +19,7 @@ typeorm_1.createConnection().then(async (connection) => {
     const app = express_1.default();
     const apolloServer = new apollo_server_express_1.ApolloServer({
         schema: await type_graphql_1.buildSchema({
-            resolvers: [hello_1.HelloResolver, post_1.PostResolver],
+            resolvers: [HelloResolver, PostResolver],
             validation: false
         }),
         context: () => ({ posts })

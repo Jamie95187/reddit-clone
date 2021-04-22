@@ -4,8 +4,6 @@ import {Post} from "./entity/Post";
 import express from 'express';
 import {ApolloServer} from 'apollo-server-express';
 import {buildSchema} from 'type-graphql';
-import { HelloResolver } from "./resolvers/hello";
-import { PostResolver } from "./resolvers/post";
 
 // Unlike mikroOrm, the createConnection function automatically finds the ormconfig.json file as long as it is
 // near the package.json (root directory)
