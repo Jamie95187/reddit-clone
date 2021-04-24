@@ -5,9 +5,9 @@
        "es5",
        "es6",
        "esnext.asynciterable",
-       "es2018"
+       "es2016"
     ],
-    "target": "es2018",
+    "target": "es2016",
     "module": "commonjs",
     "skipLibCheck": true,
     "sourceMap": true,
@@ -19,6 +19,8 @@
     "strictNullChecks": true,
     "strictFunctionTypes": true,
     "noImplicitThis": true,
+    "declaration": false,
+    "composite": false,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noImplicitReturns": true,
@@ -28,7 +30,13 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "resolveJsonModule": true,
-    "baseUrl": "."
+    "baseUrl": ".",
+    "paths": {
+        "*": [
+            "node_modules/*",
+            "app/types/*"
+        ]
+    }
   },
   "exclude": ["node_modules"],
   "include": ["./src/**/*.tsx", "./src/**/*.ts"]

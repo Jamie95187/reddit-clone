@@ -24,7 +24,7 @@ createConnection().then(async connection => {
     const apolloServer = new ApolloServer({
       schema: await buildSchema({
         resolvers: [HelloResolver, PostResolver],
-        validation: false
+        validate: false
       }),
       context: () => ({ posts })
     });
