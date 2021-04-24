@@ -1,4 +1,4 @@
-import "reflect-metadata";
+// import "reflect-metadata";
 import {createConnection} from "typeorm";
 import {Post} from "./entity/Post";
 import express from 'express';
