@@ -14,6 +14,9 @@ typeorm_1.createConnection().then((connection) => tslib_1.__awaiter(this, void 0
     const posts = yield connection.manager.find(Post_1.Post);
     console.log("Loaded users: ", posts);
     const app = express_1.default();
+    app.get('/', (_, res) => {
+        res.send('hello');
+    });
     app.listen(8080, () => {
         console.log('server started on localhost:8080');
     });

@@ -19,7 +19,9 @@ createConnection().then(async connection => {
     console.log("Loaded users: ", posts);
 
     const app = express();
-
+    app.get('/', (_, res) => {
+      res.send('hello');
+    });
     app.listen(8080, () => {
       console.log('server started on localhost:8080')
     })

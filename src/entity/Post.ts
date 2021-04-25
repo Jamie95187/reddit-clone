@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from "typeorm";
 
-// Declare object tyep when using with graphql
+// Declare object type when using with graphql
 @Entity()
 export class Post {
 
