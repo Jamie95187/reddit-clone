@@ -2,6 +2,9 @@
 import {createConnection} from "typeorm";
 import {Post} from "./entity/Post";
 import express from 'express';
+import { HelloResolver } from "./resolvers/hello";
+const { buildSchema } = require('type-graphql');
+const { ApolloServer } = require('apollo-server-express');
 
 // Unlike mikroOrm, the createConnection function automatically finds the ormconfig.json file as long as it is
 // near the package.json (root directory)
@@ -19,9 +22,16 @@ createConnection().then(async connection => {
     console.log("Loaded users: ", posts);
 
     const app = express();
-    app.get('/', (_, res) => {
-      res.send('hello');
+
+    const apolloServer = new ApolloServer({
+      schema: await buildSchema({
+        resolvers: [HelloResolver],
+        validate: false
+      })
     });
+
+    apolloServer.applyMiddleware({ app });
+    
     app.listen(8080, () => {
       console.log('server started on localhost:8080')
     })

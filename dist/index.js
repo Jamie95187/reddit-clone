@@ -4,6 +4,9 @@ const tslib_1 = require("tslib");
 const typeorm_1 = require("typeorm");
 const Post_1 = require("./entity/Post");
 const express_1 = tslib_1.__importDefault(require("express"));
+const hello_1 = require("./resolvers/hello");
+const { buildSchema } = require('type-graphql');
+const { ApolloServer } = require('apollo-server-express');
 typeorm_1.createConnection().then((connection) => tslib_1.__awaiter(this, void 0, void 0, function* () {
     console.log("Inserting a new post into the database...");
     const post = new Post_1.Post();
@@ -14,9 +17,13 @@ typeorm_1.createConnection().then((connection) => tslib_1.__awaiter(this, void 0
     const posts = yield connection.manager.find(Post_1.Post);
     console.log("Loaded users: ", posts);
     const app = express_1.default();
-    app.get('/', (_, res) => {
-        res.send('hello');
+    const apolloServer = new ApolloServer({
+        schema: yield buildSchema({
+            resolvers: [hello_1.HelloResolver],
+            validate: false
+        })
     });
+    apolloServer.applyMiddleware({ app });
     app.listen(8080, () => {
         console.log('server started on localhost:8080');
     });
