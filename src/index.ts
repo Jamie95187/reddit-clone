@@ -3,6 +3,7 @@ import {createConnection} from "typeorm";
 import {Post} from "./entity/Post";
 import express from 'express';
 import { HelloResolver } from "./resolvers/hello";
+import { PostResolver } from "./resolvers/post";
 const { buildSchema } = require('type-graphql');
 const { ApolloServer } = require('apollo-server-express');
 
@@ -25,13 +26,14 @@ createConnection().then(async connection => {
 
     const apolloServer = new ApolloServer({
       schema: await buildSchema({
-        resolvers: [HelloResolver],
+        resolvers: [HelloResolver, PostResolver],
         validate: false
-      })
+      }),
+      context: () => ({ posts_array: posts })
     });
 
     apolloServer.applyMiddleware({ app });
-    
+
     app.listen(8080, () => {
       console.log('server started on localhost:8080')
     })

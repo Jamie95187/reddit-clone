@@ -5,6 +5,7 @@ const typeorm_1 = require("typeorm");
 const Post_1 = require("./entity/Post");
 const express_1 = tslib_1.__importDefault(require("express"));
 const hello_1 = require("./resolvers/hello");
+const post_1 = require("./resolvers/post");
 const { buildSchema } = require('type-graphql');
 const { ApolloServer } = require('apollo-server-express');
 typeorm_1.createConnection().then((connection) => tslib_1.__awaiter(this, void 0, void 0, function* () {
@@ -19,9 +20,10 @@ typeorm_1.createConnection().then((connection) => tslib_1.__awaiter(this, void 0
     const app = express_1.default();
     const apolloServer = new ApolloServer({
         schema: yield buildSchema({
-            resolvers: [hello_1.HelloResolver],
+            resolvers: [hello_1.HelloResolver, post_1.PostResolver],
             validate: false
-        })
+        }),
+        context: () => ({ posts_array: posts })
     });
     apolloServer.applyMiddleware({ app });
     app.listen(8080, () => {
