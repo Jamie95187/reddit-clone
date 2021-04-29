@@ -1,6 +1,6 @@
 import "reflect-metadata";
-import {createConnection} from "typeorm";
-import {Post} from "./entity/Post";
+import { createConnection } from "typeorm";
+import { Post } from "./entity/Post";
 import express from 'express';
 import { HelloResolver } from "./resolvers/hello";
 import { PostResolver } from "./resolvers/post";
@@ -32,7 +32,7 @@ createConnection().then(async connection => {
       context: () => ({ posts_array: posts })
     });
 
-    apolloServer.applyMiddleware({ app });
+  apolloServer.applyMiddleware({ app });
 
     app.listen(8080, () => {
       console.log('server started on localhost:8080')

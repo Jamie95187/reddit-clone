@@ -5,6 +5,7 @@ const { Resolver, Query, Ctx } = require("type-graphql");
 const Post_1 = require("../entity/Post");
 let PostResolver = class PostResolver {
     posts(ctx) {
+        console.log(MyContext.posts_array);
         return ctx;
     }
 };
