@@ -4,9 +4,8 @@ import { MyContext } from '../types';
 
 @Resolver()
 export class PostResolver {
-  @Query(() => [Post])
-  posts(@Ctx() ctx: MyContext) {
-    console.log(MyContext.posts_array);
-    return ctx;
+  @Query(() => Post)
+  post(@Ctx() ctx: MyContext) {
+    return ctx.post;
   }
 }

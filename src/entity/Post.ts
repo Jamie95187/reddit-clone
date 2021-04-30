@@ -7,7 +7,7 @@ const { ObjectType, Field } = require("type-graphql");
 export class Post {
     @Field(() => Number)
     @PrimaryGeneratedColumn()
-    id: number;
+    id: Number;
 
     @Field(() => String)
     @CreateDateColumn()

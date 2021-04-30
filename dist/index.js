@@ -24,7 +24,13 @@ typeorm_1.createConnection().then((connection) => tslib_1.__awaiter(this, void 0
             resolvers: [hello_1.HelloResolver, post_1.PostResolver],
             validate: false
         }),
-        context: () => ({ posts_array: posts })
+        context: () => ({ posts_array: Post_1.Post = {
+                id: 1,
+                create_at: "2021-04-27T22:51:14.221Z",
+                update_at: "2021-04-27T22:51:14.221Z",
+                title: 'First Post'
+            }
+        })
     });
     apolloServer.applyMiddleware({ app });
     app.listen(8080, () => {
