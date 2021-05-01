@@ -4,17 +4,17 @@ const tslib_1 = require("tslib");
 const { Resolver, Query, Ctx } = require("type-graphql");
 const Post_1 = require("../entity/Post");
 let PostResolver = class PostResolver {
-    post(ctx) {
-        return ctx.post;
+    posts({ cm }) {
+        return cm.find(Post_1.Post);
     }
 };
 tslib_1.__decorate([
-    Query(() => Post_1.Post),
+    Query(() => [Post_1.Post]),
     tslib_1.__param(0, Ctx()),
     tslib_1.__metadata("design:type", Function),
     tslib_1.__metadata("design:paramtypes", [Object]),
     tslib_1.__metadata("design:returntype", void 0)
-], PostResolver.prototype, "post", null);
+], PostResolver.prototype, "posts", null);
 PostResolver = tslib_1.__decorate([
     Resolver()
 ], PostResolver);
