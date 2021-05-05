@@ -28,4 +28,21 @@ export class PostResolver {
          await connection.manager.save(post);
          return post;
   }
+
+  @Mutation(() => Post, {nullable: true})
+  async updatePost(
+    @Arg("id") id: string,
+    @Arg("title", () => String, { nullable: true }) title: string,
+       @Ctx() { cm }: MyContext): Promise<Post | null> {
+         const post = await em.findOne(Post, {id});
+         if (!post) {
+           return null
+         }
+         if (typeof title !== 'undefined') {
+           post.title;
+         }
+         post.title = "First Post";
+         await connection.manager.save(post);
+         return post;
+  }
 }
