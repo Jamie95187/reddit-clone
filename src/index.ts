@@ -20,7 +20,7 @@ createConnection().then(async connection => {
 
     const apolloServer = new ApolloServer({
       schema: await buildSchema({
-        resolvers: [HelloResolver, PostResolver],,
+        resolvers: [HelloResolver, PostResolver],
         emitSchemaFile: true,
         validate: false
       }),

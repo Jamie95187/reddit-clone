@@ -23,11 +23,9 @@ export class PostResolver {
   @Mutation(() => Post)
   async createPost(@Arg("title", () => String) title: string,
        @Ctx() { cm }: MyContext): Promise<Post> {
-         console.log("Inserting a new post into the database...");
          const post = new Post();
          post.title = "First Post";
          await connection.manager.save(post);
-         console.log("Saved a new post with id: " + post.id);
          return post;
   }
 }
