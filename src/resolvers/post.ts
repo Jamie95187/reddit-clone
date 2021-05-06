@@ -1,4 +1,5 @@
 const { Resolver, Mutation, Query, Ctx, Arg, Int } = require("type-graphql");
+const { getConnection } from "typeorm";
 import { Post } from "../entity/Post";
 import { MyContext } from '../types';
 
@@ -29,20 +30,28 @@ export class PostResolver {
          return post;
   }
 
-  @Mutation(() => Post, {nullable: true})
+  @Mutation(() => String, {nullable: true})
   async updatePost(
     @Arg("id") id: string,
     @Arg("title", () => String, { nullable: true }) title: string,
        @Ctx() { cm }: MyContext): Promise<Post | null> {
-         const post = await em.findOne(Post, {id});
-         if (!post) {
-           return null
-         }
-         if (typeof title !== 'undefined') {
-           post.title;
-         }
-         post.title = "First Post";
-         await connection.manager.save(post);
-         return post;
+         await getConnection()
+         .createQueryBuilder()
+         .update(Post)
+         .set({
+           title: title
+         })
+         .where("id = :id", { id: id })
+         .execute();
+         // const post = await em.findOne(Post, {id});
+         // if (!post) {
+         //   return null
+         // }
+         // if (typeof title !== 'undefined') {
+         //   post.title;
+         // }
+         // post.title = "First Post";
+         // await connection.manager.save(post);
+         return "Success";
   }
 }
