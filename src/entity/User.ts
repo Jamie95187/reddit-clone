@@ -1,9 +1,10 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, Unique } from "typeorm";
 const { ObjectType, Field } = require("type-graphql");
 
 // Declare object type when using with graphql
 @ObjectType()
 @Entity()
+@Unique(["username"])
 export class User {
     @Field(() => Number)
     @PrimaryGeneratedColumn()
@@ -18,7 +19,7 @@ export class User {
     update_at: Date;
 
     @Field()
-    @Property({ type: "text", unique: true })
+    @Column({ name: 'user_name' })
     username!: string;
 
     @Field()
