@@ -22,8 +22,7 @@ export class User {
     @Column({ name: 'user_name' })
     username!: string;
 
-    @Field()
     @Column()
-    title: string;
+    password!: string;
 
 }

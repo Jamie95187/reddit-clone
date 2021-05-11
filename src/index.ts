@@ -1,9 +1,10 @@
 import "reflect-metadata";
 import { createConnection } from "typeorm";
-import { Post } from "./entity/Post";
+// import { Post } from "./entity/Post";
 import express from 'express';
 import { HelloResolver } from "./resolvers/hello";
 import { PostResolver } from "./resolvers/post";
+import { UserResolver } from "./resolvers/user";
 const { buildSchema } = require('type-graphql');
 const { ApolloServer } = require('apollo-server-express');
 
@@ -12,15 +13,15 @@ const { ApolloServer } = require('apollo-server-express');
 
 createConnection().then(async connection => {
 
-    console.log("Loading posts from the database...");
-    const posts = await connection.manager.find(Post);
-    console.log("Loaded users: ", posts);
+    // console.log("Loading posts from the database...");
+    // const posts = await connection.manager.find(Post);
+    // console.log("Loaded users: ", posts);
 
     const app = express();
 
     const apolloServer = new ApolloServer({
       schema: await buildSchema({
-        resolvers: [HelloResolver, PostResolver],
+        resolvers: [HelloResolver, PostResolver, UserResolver],
         emitSchemaFile: true,
         validate: false
       }),

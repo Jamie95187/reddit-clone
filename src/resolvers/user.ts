@@ -1,4 +1,5 @@
 const { Resolver, Query, Mutation, Arg, InputType, Field } = require("type-graphql");
+const argon2 from 'argon2';
 import { MyContext } from '../types';
 import { User } from '../entity/User';
 
@@ -16,7 +17,8 @@ export class UserResolver {
   async createUser(
     @Arg('options') options: UsernamePasswordInput,
   ) {
-    const user = User.create(options);
+    const hashedPassword = await argon2.hash(options.password);
+    const user = User.create(User, { username: options.username, password: hashedPassword });
     await user.save();
     return user;
   }
