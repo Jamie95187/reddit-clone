@@ -33,14 +33,38 @@ class UserResponse {
 export class UserResolver {
 
   // Registering new users
-  @Mutation(() => User)
+  @Mutation(() => UserResponse)
   async createUser(
     @Arg('options') options: UsernamePasswordInput,
-  ) {
+  ): Promise<UserResponse> {
+
+    // Validation
+    if (options.username.length <= 2) {
+      return {
+          errors: [
+            {
+              field: "username",
+              message: "length must be greater than 2",
+            },
+        ],
+      };
+    }
+
+    if (options.password.length <= 3) {
+      return {
+          errors: [
+            {
+              field: "password",
+              message: "length must be greater than 2",
+            },
+        ],
+      };
+    }
+
     const hashedPassword = await argon2.hash(options.password);
     const user = User.create(User, { username: options.username, password: hashedPassword });
     await user.save();
-    return user;
+    return { user };
   }
 
   // Logging in
