@@ -1,4 +1,4 @@
-const { Resolver, Query, Mutation, Arg, InputType, Field, ObjectType } = require("type-graphql");
+const { Resolver, Mutation, Arg, InputType, Field, ObjectType } = require("type-graphql");
 const argon2 = require ('argon2');
 import { getManager } from 'typeorm';
 import { User } from '../entity/User';
@@ -22,7 +22,7 @@ class FieldError {
 
 @ObjectType()
 class UserResponse {
-  @Field(() => [Error], {nullable: true})
+  @Field(() => [FieldError], {nullable: true})
   errors?: FieldError[];
 
   @Field(() => User, {nullable: true})
@@ -62,10 +62,13 @@ export class UserResolver {
     }
 
     const hashedPassword = await argon2.hash(options.password);
-    const user = User.create(User, { username: options.username, password: hashedPassword });
-    await user.save();
+
+    let user = new User;
+    // user.id = 1;
+    user.username = options.username;
+    user.password = hashedPassword;
     try {
-      await user.save();
+      await getManager().save(user);
     } catch(err) {
       console.log("message: ", err.message);
     }
@@ -73,6 +76,7 @@ export class UserResolver {
   }
 
   // Logging in
+
   @Mutation(() => UserResponse)
   async login(
     @Arg('options') options: UsernamePasswordInput,

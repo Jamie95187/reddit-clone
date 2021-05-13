@@ -1,7 +1,6 @@
-const { Resolver, Mutation, Query, Ctx, Arg, Int } = require("type-graphql");
-const { getConnection } = require ("typeorm");
+const { Resolver, Mutation, Query, Arg, Int } = require("type-graphql");
+const { getConnection} = require ("typeorm");
 import { Post } from "../entity/Post";
-import { MyContext } from '../types';
 
 @Resolver()
 export class PostResolver {
@@ -9,14 +8,13 @@ export class PostResolver {
   // Queries are used for getting data
 
   @Query(() => [Post])
-  posts(@Ctx() { cm }: MyContext): Promise<Post[]> {
-    return cm.find(Post, {});
+  posts(): Promise<Post[]> {
+    return getConnection().manager.find(Post, {});
   }
 
   @Query(() => Post, { nullable: true })
-  post(@Arg('id', () => Int) id: number,
-       @Ctx() { cm }: MyContext): Promise<Post | null> {
-    return cm.findOne(Post, {id});
+  post(@Arg('id', () => Int) id: number): Promise<Post | null> {
+    return getConnection().manager.findOne(Post, {id});
   }
 
   // Mutations are for updating, inserting and deleting
@@ -26,7 +24,7 @@ export class PostResolver {
   async createPost(@Arg("title", () => String) title: string)
   {
      const post = new Post();
-     post.title = "First Post";
+     post.title = title;
      await getConnection().manager.save(post);
      return post;
   }

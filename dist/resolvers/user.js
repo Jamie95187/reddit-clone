@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const tslib_1 = require("tslib");
-const { Resolver, Query, Mutation, Arg, InputType, Field, ObjectType } = require("type-graphql");
+const { Resolver, Mutation, Arg, InputType, Field, ObjectType } = require("type-graphql");
 const argon2 = require('argon2');
 const typeorm_1 = require("typeorm");
 const User_1 = require("../entity/User");
@@ -34,7 +34,7 @@ FieldError = tslib_1.__decorate([
 let UserResponse = class UserResponse {
 };
 tslib_1.__decorate([
-    Field(() => [Error], { nullable: true }),
+    Field(() => [FieldError], { nullable: true }),
     tslib_1.__metadata("design:type", Array)
 ], UserResponse.prototype, "errors", void 0);
 tslib_1.__decorate([
@@ -68,10 +68,11 @@ let UserResolver = class UserResolver {
                 };
             }
             const hashedPassword = yield argon2.hash(options.password);
-            const user = User_1.User.create(User_1.User, { username: options.username, password: hashedPassword });
-            yield user.save();
+            let user = new User_1.User;
+            user.username = options.username;
+            user.password = hashedPassword;
             try {
-                yield user.save();
+                yield typeorm_1.getManager().save(user);
             }
             catch (err) {
                 console.log("message: ", err.message);
