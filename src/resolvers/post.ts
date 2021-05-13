@@ -1,5 +1,5 @@
 const { Resolver, Mutation, Query, Ctx, Arg, Int } = require("type-graphql");
-const { getConnection } from "typeorm";
+const { getConnection } = require ("typeorm");
 import { Post } from "../entity/Post";
 import { MyContext } from '../types';
 

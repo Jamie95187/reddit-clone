@@ -1,5 +1,5 @@
 const { Resolver, Query, Mutation, Arg, InputType, Field, ObjectType } = require("type-graphql");
-const argon2 from 'argon2';
+const argon2 = require ('argon2');
 import { getManager } from 'typeorm';
 import { User } from '../entity/User';
 
@@ -22,7 +22,7 @@ class FieldError {
 
 @ObjectType()
 class UserResponse {
-  @Field(() [Error], {nullable: true})
+  @Field(() => [Error], {nullable: true})
   errors?: FieldError[];
 
   @Field(() => User, {nullable: true})
@@ -55,7 +55,7 @@ export class UserResolver {
           errors: [
             {
               field: "password",
-              message: "length must be greater than 2",
+              message: "length must be greater than 3",
             },
         ],
       };
@@ -64,6 +64,11 @@ export class UserResolver {
     const hashedPassword = await argon2.hash(options.password);
     const user = User.create(User, { username: options.username, password: hashedPassword });
     await user.save();
+    try {
+      await user.save();
+    } catch(err) {
+      console.log("message: ", err.message);
+    }
     return { user };
   }
 
