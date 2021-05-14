@@ -70,7 +70,16 @@ export class UserResolver {
     try {
       await getManager().save(user);
     } catch(err) {
-      console.log("message: ", err.message);
+      // Duplicate user name error
+      if (err.message.includes("duplicate key value violates unique constraint")) {
+        return {
+          errors: [{
+            field: 'username',
+            message: "username already taken"
+          }]
+        }
+      }
+      console.log("message:", err.message);
     }
     return { user };
   }

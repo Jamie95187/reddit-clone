@@ -75,7 +75,15 @@ let UserResolver = class UserResolver {
                 yield typeorm_1.getManager().save(user);
             }
             catch (err) {
-                console.log("message: ", err.message);
+                if (err.message.includes("duplicate key value violates unique constraint")) {
+                    return {
+                        errors: [{
+                                field: 'username',
+                                message: "username already taken"
+                            }]
+                    };
+                }
+                console.log("message:", err.message);
             }
             return { user };
         });
