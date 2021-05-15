@@ -5,6 +5,9 @@ import express from 'express';
 import { HelloResolver } from "./resolvers/hello";
 import { PostResolver } from "./resolvers/post";
 import { UserResolver } from "./resolvers/user";
+import redis from 'redis';
+import session from 'express-session';
+import connectRedis from 'connect-redis';
 const { buildSchema } = require('type-graphql');
 const { ApolloServer } = require('apollo-server-express');
 
@@ -18,6 +21,35 @@ createConnection().then(async connection => {
     // console.log("Loaded users: ", posts);
 
     const app = express();
+
+    const RedisStore = connectRedis(session)
+    const redisClient = redis.createClient()
+
+    // Session middleware needs to be added before the apollo middleware because we will use
+    // session inside apolloserver
+
+    redisClient.on("error", function(error) {
+      console.error(error);
+    });
+
+    app.use(
+      session({
+        name: 'qid',
+        store: new RedisStore({
+          client: redisClient,
+          disableTouch: true
+         }),
+         cookie: {
+           maxAge: 1000 * 60 * 60 * 24 * 365 * 10, // 10 years
+           httpOnly: true,
+           sameSite: 'lax', // csrf
+           secure: true // cookie only works in https
+         },
+        saveUninitialized: false,
+        secret: 'qwewqeqqadsdqwdasdadq',
+        resave: false,
+      })
+    )
 
     const apolloServer = new ApolloServer({
       schema: await buildSchema({
