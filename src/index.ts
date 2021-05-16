@@ -28,10 +28,6 @@ createConnection().then(async connection => {
     // Session middleware needs to be added before the apollo middleware because we will use
     // session inside apolloserver
 
-    redisClient.on("error", function(error) {
-      console.error(error);
-    });
-
     app.use(
       session({
         name: 'qid',
