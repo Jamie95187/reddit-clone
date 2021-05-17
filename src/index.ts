@@ -22,6 +22,8 @@ createConnection().then(async connection => {
 
     const app = express();
 
+    // Need to install windows subsystem linux in order to use setup redis
+
     const RedisStore = connectRedis(session)
     const redisClient = redis.createClient()
 
