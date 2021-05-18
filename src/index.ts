@@ -23,6 +23,7 @@ createConnection().then(async connection => {
     const app = express();
 
     // Need to install windows subsystem linux in order to use setup redis
+    // Use Docker container with redis ??!??!
 
     const RedisStore = connectRedis(session)
     const redisClient = redis.createClient()
