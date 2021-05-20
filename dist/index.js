@@ -38,7 +38,7 @@ typeorm_1.createConnection().then((connection) => tslib_1.__awaiter(this, void 0
             emitSchemaFile: true,
             validate: false
         }),
-        context: () => ({ cm: connection.manager })
+        context: ({ req, res }) => ({ cm: connection.manager, req, res })
     });
     apolloServer.applyMiddleware({ app });
     app.listen(8080, () => {

@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const tslib_1 = require("tslib");
-const { Resolver, Mutation, Arg, InputType, Field, ObjectType } = require("type-graphql");
+const { Resolver, Mutation, Arg, InputType, Field, ObjectType, Ctx } = require("type-graphql");
 const argon2 = require('argon2');
 const typeorm_1 = require("typeorm");
 const User_1 = require("../entity/User");
@@ -88,7 +88,7 @@ let UserResolver = class UserResolver {
             return { user };
         });
     }
-    login(options) {
+    login(options, { req }) {
         return tslib_1.__awaiter(this, void 0, void 0, function* () {
             const user = yield typeorm_1.getManager().findOne(User_1.User, { username: options.username });
             if (!user) {
@@ -112,6 +112,7 @@ let UserResolver = class UserResolver {
                     ],
                 };
             }
+            req.session.userId = user.id;
             return {
                 user,
             };
@@ -128,8 +129,9 @@ tslib_1.__decorate([
 tslib_1.__decorate([
     Mutation(() => UserResponse),
     tslib_1.__param(0, Arg('options')),
+    tslib_1.__param(1, Ctx()),
     tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", [UsernamePasswordInput]),
+    tslib_1.__metadata("design:paramtypes", [UsernamePasswordInput, Object]),
     tslib_1.__metadata("design:returntype", Promise)
 ], UserResolver.prototype, "login", null);
 UserResolver = tslib_1.__decorate([

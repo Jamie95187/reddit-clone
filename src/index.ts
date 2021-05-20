@@ -1,6 +1,6 @@
 import "reflect-metadata";
 import { createConnection } from "typeorm";
-// import { Post } from "./entity/Post";
+import { MyContext } from './types';
 import express from 'express';
 import { HelloResolver } from "./resolvers/hello";
 import { PostResolver } from "./resolvers/post";
@@ -22,7 +22,6 @@ createConnection().then(async connection => {
 
     const app = express();
 
-    // Need to install windows subsystem linux in order to use setup redis
     // Use Docker container with redis
     // Connect to redis using docker in cmd "docker run -d -p 6379:6379 --name redis1 redis"
 
@@ -57,7 +56,7 @@ createConnection().then(async connection => {
         emitSchemaFile: true,
         validate: false
       }),
-      context: () => ({ cm: connection.manager })
+      context: ({ req, res }): MyContext => ({ cm: connection.manager, req, res })
     });
 
   apolloServer.applyMiddleware({ app });

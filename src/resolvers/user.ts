@@ -1,5 +1,6 @@
-const { Resolver, Mutation, Arg, InputType, Field, ObjectType } = require("type-graphql");
+const { Resolver, Mutation, Arg, InputType, Field, ObjectType, Ctx } = require("type-graphql");
 const argon2 = require ('argon2');
+import { MyContext } from '../types';
 import { getManager } from 'typeorm';
 import { User } from '../entity/User';
 
@@ -89,6 +90,7 @@ export class UserResolver {
   @Mutation(() => UserResponse)
   async login(
     @Arg('options') options: UsernamePasswordInput,
+    @Ctx() { req }: MyContext
   ): Promise<UserResponse> {
     const user = await getManager().findOne(User, { username: options.username });
     // User not found
@@ -114,6 +116,8 @@ export class UserResolver {
         ],
       };
     }
+
+    req.session!.userId = user.id;
 
     return {
       user,
