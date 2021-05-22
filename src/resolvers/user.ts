@@ -32,6 +32,20 @@ class UserResponse {
 
 @Resolver()
 export class UserResolver {
+  @Query(() => User, {nullable: true})
+  async me(
+    @Ctx() { req }: MyContext
+  ) {
+
+    // you are not logged in
+    if (!req.session.userId) {
+      return null
+    }
+
+    const user = await getManager().findOne(User, { id: req.session.userId });
+
+    return user;
+  }
 
   // Registering new users
   @Mutation(() => UserResponse)

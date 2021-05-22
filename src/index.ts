@@ -24,6 +24,9 @@ createConnection().then(async connection => {
 
     // Use Docker container with redis
     // Connect to redis using docker in cmd "docker run -d -p 6379:6379 --name redis1 redis"
+    // User 'docker container start redis1'
+    // 'docker exec -it redis1 sh'
+    // '# redis-cli'
 
     const RedisStore = connectRedis(session)
     const redisClient = redis.createClient()
