@@ -1,4 +1,4 @@
-const { Resolver, Mutation, Arg, InputType, Field, ObjectType, Ctx } = require("type-graphql");
+const { Query, Resolver, Mutation, Arg, InputType, Field, ObjectType, Ctx } = require("type-graphql");
 const argon2 = require ('argon2');
 import { MyContext } from '../types';
 import { getManager } from 'typeorm';
