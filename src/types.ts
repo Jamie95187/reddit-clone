@@ -1,4 +1,3 @@
-import { Post } from './entity/Post';
 import { Request, Response } from 'express';
 import { Session } from 'express-session';
 
