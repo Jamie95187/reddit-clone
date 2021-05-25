@@ -25,6 +25,7 @@ type Post {
 
 type Query {
   hello: String!
+  me: User
   post(id: Int!): Post
   posts: [Post!]!
 }
