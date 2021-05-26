@@ -192,7 +192,7 @@
     "@types/qs" "*"
     "@types/range-parser" "*"
 
-"@types/express-session@*", "@types/express-session@^1.17.3":
+"@types/express-session@*", "@types/express-session@1.17.3":
   "integrity" "sha512-57DnyxiqClXOIjoCgeKCUYfKxBPOlOY/k+l1TPK+7bSwyiPTrS5FIk1Ycql7twk4wO7P5lfOVy6akDGiaMSLfw=="
   "resolved" "https://registry.npmjs.org/@types/express-session/-/express-session-1.17.3.tgz"
   "version" "1.17.3"
@@ -309,6 +309,15 @@
   "integrity" "sha512-Dn5RBxLohjdHFj17dVVw3rtrZAeXeWg+LQfvxDIW/fdPkSiuQk7h3frKMYtsQhtIW42wkErDcy9UMVxhGW4O7w=="
   "resolved" "https://registry.npmjs.org/@types/node/-/node-10.17.58.tgz"
   "version" "10.17.58"
+
+"@types/pg@^7.14.4":
+  "integrity" "sha512-EnZkZ1OMw9DvNfQkn2MTJrwKmhJYDEs5ujWrPfvseWNoI95N8B4HzU/Ltrq5ZfYxDX/Zg8mTzwr6UAyTjjFvXA=="
+  "resolved" "https://registry.npmjs.org/@types/pg/-/pg-7.14.11.tgz"
+  "version" "7.14.11"
+  dependencies:
+    "@types/node" "*"
+    "pg-protocol" "^1.2.0"
+    "pg-types" "^2.2.0"
 
 "@types/qs@*":
   "integrity" "sha512-0/HnwIfW4ki2D8L8c9GVcG5I72s9jP5GSLVF0VIXDW00kmIpA6O33G7a8n59Tmh7Nz0WUC3rSb7PTY/sdW2JzA=="
@@ -855,6 +864,14 @@
   "integrity" "sha1-2Klr13/Wjfd5OnMDajug1UBdR3s="
   "resolved" "https://registry.npmjs.org/concat-map/-/concat-map-0.0.1.tgz"
   "version" "0.0.1"
+
+"connect-pg-simple@^6.2.1":
+  "integrity" "sha512-bwDp/gKyRtyz0V5Vxy3SATSxItWBK/wDhaacncC79+q1B1VB8SQ49AlVaQCM+XxmIO29cWX4cvsFj65mD2qrzA=="
+  "resolved" "https://registry.npmjs.org/connect-pg-simple/-/connect-pg-simple-6.2.1.tgz"
+  "version" "6.2.1"
+  dependencies:
+    "@types/pg" "^7.14.4"
+    "pg" "^8.2.1"
 
 "connect-redis@^5.2.0":
   "integrity" "sha512-wcv1lZWa2K7RbsdSlrvwApBQFLQx+cia+oirLIeim0axR3D/9ZJbHdeTM/j8tJYYKk34dVs2QPAuAqcIklWD+Q=="
@@ -1796,12 +1813,12 @@
   "resolved" "https://registry.npmjs.org/pg-pool/-/pg-pool-3.3.0.tgz"
   "version" "3.3.0"
 
-"pg-protocol@^1.5.0":
+"pg-protocol@^1.2.0", "pg-protocol@^1.5.0":
   "integrity" "sha512-muRttij7H8TqRNu/DxrAJQITO4Ac7RmX3Klyr/9mJEOBeIpgnF8f9jAfRz5d3XwQZl5qBjF9gLsUtMPJE0vezQ=="
   "resolved" "https://registry.npmjs.org/pg-protocol/-/pg-protocol-1.5.0.tgz"
   "version" "1.5.0"
 
-"pg-types@^2.1.0":
+"pg-types@^2.1.0", "pg-types@^2.2.0":
   "integrity" "sha512-qTAAlrEsl8s4OiEQY69wDvcMIdQN6wdz5ojQiOy6YRMuynxenON0O5oCpJI6lshc6scgAY8qvJ2On/p+CXY0GA=="
   "resolved" "https://registry.npmjs.org/pg-types/-/pg-types-2.2.0.tgz"
   "version" "2.2.0"
@@ -1812,7 +1829,7 @@
     "postgres-date" "~1.0.4"
     "postgres-interval" "^1.1.0"
 
-"pg@^8.6.0", "pg@>=8.0":
+"pg@^8.2.1", "pg@^8.6.0", "pg@>=8.0":
   "integrity" "sha512-qNS9u61lqljTDFvmk/N66EeGq3n6Ujzj0FFyNMGQr6XuEv4tgNTXvJQTfJdcvGit5p5/DWPu+wj920hAJFI+QQ=="
   "resolved" "https://registry.npmjs.org/pg/-/pg-8.6.0.tgz"
   "version" "8.6.0"
