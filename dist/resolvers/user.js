@@ -50,7 +50,7 @@ let UserResolver = class UserResolver {
             if (!req.session.userId) {
                 return null;
             }
-            const user = yield typeorm_1.getManager().findOne(User_1.User, { id: req.session.userId });
+            const user = yield typeorm_1.getManager().findOne(User_1.User, { id: 6 });
             return user;
         });
     }

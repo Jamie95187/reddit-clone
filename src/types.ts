@@ -3,6 +3,7 @@ import { Session } from 'express-session';
 
 export type MyContext = {
   // req: Request & {session?: Session & { userId?: Number }};
-  req: Request { session: Session & userId?: 6 };
+  // Mock Request
+  req: Request & { session?: Session & { userId?: 6 } };
   res: Response;
 }

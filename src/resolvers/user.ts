@@ -42,7 +42,7 @@ export class UserResolver {
       return null
     }
 
-    const user = await getManager().findOne(User, { id: req.session.userId });
+    const user = await getManager().findOne(User, { id: 6 });
 
     return user;
   }
