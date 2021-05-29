@@ -16,10 +16,6 @@ const { ApolloServer } = require('apollo-server-express');
 
 createConnection().then(async connection => {
 
-    // console.log("Loading posts from the database...");
-    // const posts = await connection.manager.find(Post);
-    // console.log("Loaded users: ", posts);
-
     const app = express();
 
     // Use Docker container with redis
