@@ -50,11 +50,11 @@ let UserResolver = class UserResolver {
             if (!req.session.userId) {
                 return null;
             }
-            const user = yield typeorm_1.getManager().findOne(User_1.User, { id: 6 });
+            const user = yield typeorm_1.getManager().findOne(User_1.User, { id: !req.session.userId });
             return user;
         });
     }
-    createUser(options) {
+    createUser(options, { req }) {
         return tslib_1.__awaiter(this, void 0, void 0, function* () {
             if (options.username.length <= 2) {
                 return {
@@ -92,8 +92,8 @@ let UserResolver = class UserResolver {
                             }]
                     };
                 }
-                console.log("message:", err.message);
             }
+            req.session.userId = user.id;
             return { user };
         });
     }
@@ -122,6 +122,7 @@ let UserResolver = class UserResolver {
                 };
             }
             req.session.userId = user.id;
+            console.log(user.id);
             return {
                 user,
             };
@@ -138,8 +139,9 @@ tslib_1.__decorate([
 tslib_1.__decorate([
     Mutation(() => UserResponse),
     tslib_1.__param(0, Arg('options')),
+    tslib_1.__param(1, Ctx()),
     tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", [UsernamePasswordInput]),
+    tslib_1.__metadata("design:paramtypes", [UsernamePasswordInput, Object]),
     tslib_1.__metadata("design:returntype", Promise)
 ], UserResolver.prototype, "createUser", null);
 tslib_1.__decorate([

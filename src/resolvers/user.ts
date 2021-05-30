@@ -42,7 +42,7 @@ export class UserResolver {
       return null
     }
 
-    const user = await getManager().findOne(User, { id: 6 });
+    const user = await getManager().findOne(User, { id: !req.session.userId });
 
     return user;
   }
@@ -51,6 +51,7 @@ export class UserResolver {
   @Mutation(() => UserResponse)
   async createUser(
     @Arg('options') options: UsernamePasswordInput,
+    @Ctx() { req }: MyContext
   ): Promise<UserResponse> {
 
     // Validation
@@ -94,8 +95,14 @@ export class UserResolver {
           }]
         }
       }
-      console.log("message:", err.message);
+      // console.log("message:", err.message);
     }
+
+    // store user id Session
+    // this will set a cookie to the user
+    // keep user logged in
+    req.session.userId = user.id;
+
     return { user };
   }
 
@@ -132,6 +139,7 @@ export class UserResolver {
     }
 
     req.session!.userId = user.id;
+    console.log(user.id);
 
     return {
       user,

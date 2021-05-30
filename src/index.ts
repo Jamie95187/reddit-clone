@@ -55,7 +55,7 @@ createConnection().then(async connection => {
         emitSchemaFile: true,
         validate: false
       }),
-      context: ({ req, res }): MyContext => ({  req, res })
+      context: ({ req, res }): MyContext => ({ req, res })
     });
 
   apolloServer.applyMiddleware({ app });
