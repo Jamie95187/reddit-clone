@@ -47,6 +47,7 @@ UserResponse = tslib_1.__decorate([
 let UserResolver = class UserResolver {
     me({ req }) {
         return tslib_1.__awaiter(this, void 0, void 0, function* () {
+            console.log("session: ", req.session);
             if (!req.session.userId) {
                 return null;
             }

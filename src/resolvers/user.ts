@@ -36,7 +36,7 @@ export class UserResolver {
   async me(
     @Ctx() { req }: MyContext
   ) {
-
+    console.log("session: ", req.session);
     // you are not logged in
     if (!req.session.userId) {
       return null
