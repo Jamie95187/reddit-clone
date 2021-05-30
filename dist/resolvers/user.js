@@ -51,7 +51,7 @@ let UserResolver = class UserResolver {
             if (!req.session.userId) {
                 return null;
             }
-            const user = yield typeorm_1.getManager().findOne(User_1.User, { id: !req.session.userId });
+            const user = yield typeorm_1.getManager().findOne(User_1.User, { id: req.session.userId });
             return user;
         });
     }
@@ -123,7 +123,6 @@ let UserResolver = class UserResolver {
                 };
             }
             req.session.userId = user.id;
-            console.log(user.id);
             return {
                 user,
             };

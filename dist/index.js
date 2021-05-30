@@ -26,7 +26,7 @@ typeorm_1.createConnection().then((connection) => tslib_1.__awaiter(this, void 0
             maxAge: 1000 * 60 * 60 * 24 * 365 * 10,
             httpOnly: true,
             sameSite: 'lax',
-            secure: true
+            secure: false,
         },
         saveUninitialized: false,
         secret: 'qwewqeqqadsdqwdasdadq',

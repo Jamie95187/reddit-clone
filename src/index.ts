@@ -41,7 +41,7 @@ createConnection().then(async connection => {
            maxAge: 1000 * 60 * 60 * 24 * 365 * 10, // 10 years
            httpOnly: true,
            sameSite: 'lax', // csrf
-           secure: true // cookie only works in https
+           secure: false, // cookie only works in https
          },
         saveUninitialized: false,
         secret: 'qwewqeqqadsdqwdasdadq',
