@@ -139,6 +139,8 @@ export class UserResolver {
     }
 
     req.session!.userId = user.id;
+    // Can store entire user
+    // req.session.user = user;
 
     return {
       user,

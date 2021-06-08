@@ -58,7 +58,10 @@ createConnection().then(async connection => {
       context: ({ req, res }): MyContext => ({ req, res })
     });
 
-  apolloServer.applyMiddleware({ app });
+  apolloServer.applyMiddleware({
+    app,
+    cors: false,
+  });
 
     app.listen(8080, () => {
       console.log('server started on localhost:8080')
