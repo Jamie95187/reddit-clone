@@ -1,6 +1,5 @@
 import "reflect-metadata";
 import { createConnection } from "typeorm";
-import { MyContext } from './types';
 import express from 'express';
 import { HelloResolver } from "./resolvers/hello";
 import { PostResolver } from "./resolvers/post";
@@ -10,6 +9,7 @@ import session from 'express-session';
 import connectRedis from 'connect-redis';
 const { buildSchema } = require('type-graphql');
 const { ApolloServer } = require('apollo-server-express');
+import cors from 'cors';
 
 // Unlike mikroOrm, the createConnection function automatically finds the ormconfig.json file as long as it is
 // near the package.json (root directory)
@@ -29,6 +29,13 @@ createConnection().then(async connection => {
 
     // Session middleware needs to be added before the apollo middleware because we will use
     // session inside apolloserver
+
+    app.use(
+      cors({
+        origin: "http://localhost:3000",
+        credentials: true,
+      })
+    );
 
     app.use(
       session({
@@ -55,7 +62,7 @@ createConnection().then(async connection => {
         emitSchemaFile: true,
         validate: false
       }),
-      context: ({ req, res }): MyContext => ({ req, res })
+      context: ({ req, res }) => ({ req, res })
     });
 
   apolloServer.applyMiddleware({
