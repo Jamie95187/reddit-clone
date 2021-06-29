@@ -10,6 +10,7 @@ import connectRedis from 'connect-redis';
 const { buildSchema } = require('type-graphql');
 const { ApolloServer } = require('apollo-server-express');
 import cors from 'cors';
+import { COOKIE_NAME } from './constants';
 
 // Unlike mikroOrm, the createConnection function automatically finds the ormconfig.json file as long as it is
 // near the package.json (root directory)
@@ -39,7 +40,7 @@ createConnection().then(async connection => {
 
     app.use(
       session({
-        name: 'qid',
+        name: COOKIE_NAME,
         store: new RedisStore({
           client: redisClient,
           disableTouch: true

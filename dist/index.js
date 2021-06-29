@@ -13,6 +13,7 @@ const connect_redis_1 = tslib_1.__importDefault(require("connect-redis"));
 const { buildSchema } = require('type-graphql');
 const { ApolloServer } = require('apollo-server-express');
 const cors_1 = tslib_1.__importDefault(require("cors"));
+const constants_1 = require("./constants");
 typeorm_1.createConnection().then((connection) => tslib_1.__awaiter(this, void 0, void 0, function* () {
     const app = express_1.default();
     const RedisStore = connect_redis_1.default(express_session_1.default);
@@ -22,7 +23,7 @@ typeorm_1.createConnection().then((connection) => tslib_1.__awaiter(this, void 0
         credentials: true,
     }));
     app.use(express_session_1.default({
-        name: 'qid',
+        name: constants_1.COOKIE_NAME,
         store: new RedisStore({
             client: redisClient,
             disableTouch: true

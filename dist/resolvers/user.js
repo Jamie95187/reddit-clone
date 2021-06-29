@@ -5,6 +5,7 @@ const { Query, Resolver, Mutation, Arg, InputType, Field, ObjectType, Ctx } = re
 const argon2 = require('argon2');
 const typeorm_1 = require("typeorm");
 const User_1 = require("../entity/User");
+const constants_1 = require("../constants");
 let UsernamePasswordInput = class UsernamePasswordInput {
 };
 tslib_1.__decorate([
@@ -128,6 +129,18 @@ let UserResolver = class UserResolver {
             };
         });
     }
+    logout({ req, res }) {
+        return new Promise((resolve) => req.session.destroy((err) => {
+            res.clearCookie(constants_1.COOKIE_NAME);
+            if (err) {
+                console.log(err);
+                resolve(false);
+                return;
+            }
+            resolve(true);
+        }));
+    }
+    ;
 };
 tslib_1.__decorate([
     Query(() => User_1.User, { nullable: true }),
@@ -152,6 +165,13 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:paramtypes", [UsernamePasswordInput, Object]),
     tslib_1.__metadata("design:returntype", Promise)
 ], UserResolver.prototype, "login", null);
+tslib_1.__decorate([
+    Mutation(() => Boolean),
+    tslib_1.__param(0, Ctx()),
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", [Object]),
+    tslib_1.__metadata("design:returntype", void 0)
+], UserResolver.prototype, "logout", null);
 UserResolver = tslib_1.__decorate([
     Resolver()
 ], UserResolver);
