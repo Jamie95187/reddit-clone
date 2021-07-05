@@ -8,7 +8,7 @@ export class PostResolver {
   // Queries are used for getting data
 
   @Query(() => [Post])
-  posts(): Promise<Post[]> {
+  async posts(): Promise<Post[]> {
     return getConnection().manager.find(Post, {});
   }
 

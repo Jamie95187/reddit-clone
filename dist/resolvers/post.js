@@ -6,7 +6,9 @@ const { getConnection } = require("typeorm");
 const Post_1 = require("../entity/Post");
 let PostResolver = class PostResolver {
     posts() {
-        return getConnection().manager.find(Post_1.Post, {});
+        return tslib_1.__awaiter(this, void 0, void 0, function* () {
+            return getConnection().manager.find(Post_1.Post, {});
+        });
     }
     post(id) {
         return getConnection().manager.findOne(Post_1.Post, { id });
