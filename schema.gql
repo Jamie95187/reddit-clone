@@ -12,6 +12,7 @@ type Mutation {
   createPost(title: String!): Post!
   createUser(options: UsernamePasswordInput!): UserResponse!
   deletePost(id: String!): Boolean!
+  forgotPassword(email: String!): Boolean!
   login(options: UsernamePasswordInput!): UserResponse!
   logout: Boolean!
   updatePost(id: String!, title: String): String

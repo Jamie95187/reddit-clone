@@ -46,6 +46,11 @@ UserResponse = tslib_1.__decorate([
     ObjectType()
 ], UserResponse);
 let UserResolver = class UserResolver {
+    forgotPassword(email, { req }) {
+        return tslib_1.__awaiter(this, void 0, void 0, function* () {
+            return true;
+        });
+    }
     me({ req }) {
         return tslib_1.__awaiter(this, void 0, void 0, function* () {
             console.log("session: ", req.session);
@@ -142,6 +147,14 @@ let UserResolver = class UserResolver {
     }
     ;
 };
+tslib_1.__decorate([
+    Mutation(() => Boolean),
+    tslib_1.__param(0, Arg('email')),
+    tslib_1.__param(1, Ctx()),
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", [String, Object]),
+    tslib_1.__metadata("design:returntype", Promise)
+], UserResolver.prototype, "forgotPassword", null);
 tslib_1.__decorate([
     Query(() => User_1.User, { nullable: true }),
     tslib_1.__param(0, Ctx()),

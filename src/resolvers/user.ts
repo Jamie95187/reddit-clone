@@ -33,6 +33,15 @@ class UserResponse {
 
 @Resolver()
 export class UserResolver {
+  @Mutation(() => Boolean)
+  async forgotPassword(
+    @Arg('email') email: string,
+    @Ctx() {req} : MyContext
+  ) {
+    // const user = await getManager().findOne(User, { username: options.username });
+    return true;
+  }
+
   @Query(() => User, {nullable: true})
   async me(
     @Ctx() { req }: MyContext
