@@ -26,6 +26,11 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:type", String)
 ], User.prototype, "username", void 0);
 tslib_1.__decorate([
+    Field(),
+    typeorm_1.Column(),
+    tslib_1.__metadata("design:type", String)
+], User.prototype, "email", void 0);
+tslib_1.__decorate([
     typeorm_1.Column(),
     tslib_1.__metadata("design:type", String)
 ], User.prototype, "password", void 0);
