@@ -14,9 +14,7 @@ const { buildSchema } = require('type-graphql');
 const { ApolloServer } = require('apollo-server-express');
 const cors_1 = tslib_1.__importDefault(require("cors"));
 const constants_1 = require("./constants");
-const sendEmail_1 = require("./utils/sendEmail");
 typeorm_1.createConnection().then((connection) => tslib_1.__awaiter(this, void 0, void 0, function* () {
-    sendEmail_1.sendEmail('asda@adsa.com', "hello there");
     const app = express_1.default();
     const RedisStore = connect_redis_1.default(express_session_1.default);
     const redisClient = redis_1.default.createClient();

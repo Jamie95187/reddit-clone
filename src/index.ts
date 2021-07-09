@@ -1,5 +1,5 @@
 import "reflect-metadata";
-import { createConnection } from "typeorm";
+import { createConnection, getConnection } from "typeorm";
 import express from 'express';
 import { HelloResolver } from "./resolvers/hello";
 import { PostResolver } from "./resolvers/post";
@@ -11,13 +11,19 @@ const { buildSchema } = require('type-graphql');
 const { ApolloServer } = require('apollo-server-express');
 import cors from 'cors';
 import { COOKIE_NAME } from './constants';
-import { sendEmail } from "./utils/sendEmail";
+import { User } from "./entity/User";
 
 // Unlike mikroOrm, the createConnection function automatically finds the ormconfig.json file as long as it is
 // near the package.json (root directory)
 
 createConnection().then(async connection => {
-    sendEmail('asda@adsa.com', "hello there");
+
+    // await getConnection()
+    //   .createQueryBuilder()
+    //   .delete()
+    //   .from(User)
+    //   .execute();
+
     const app = express();
 
     // Use Docker container with redis

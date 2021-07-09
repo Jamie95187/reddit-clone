@@ -11,6 +11,10 @@ let UsernamePasswordInput = class UsernamePasswordInput {
 tslib_1.__decorate([
     Field(),
     tslib_1.__metadata("design:type", String)
+], UsernamePasswordInput.prototype, "email", void 0);
+tslib_1.__decorate([
+    Field(),
+    tslib_1.__metadata("design:type", String)
 ], UsernamePasswordInput.prototype, "username", void 0);
 tslib_1.__decorate([
     Field(),
@@ -79,6 +83,16 @@ let UserResolver = class UserResolver {
                         {
                             field: "password",
                             message: "length must be greater than 3",
+                        },
+                    ],
+                };
+            }
+            if (!options.email.includes('@')) {
+                return {
+                    errors: [
+                        {
+                            field: "email",
+                            message: "invalid email",
                         },
                     ],
                 };

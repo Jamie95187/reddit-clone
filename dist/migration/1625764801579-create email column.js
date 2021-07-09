@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const tslib_1 = require("tslib");
-class createEmailColumn1625722803427 {
+class createEmailColumn1625764801579 {
     up(queryRunner) {
         return tslib_1.__awaiter(this, void 0, void 0, function* () {
         });
@@ -11,5 +11,5 @@ class createEmailColumn1625722803427 {
         });
     }
 }
-exports.createEmailColumn1625722803427 = createEmailColumn1625722803427;
-//# sourceMappingURL=1625722803427-create email column.js.map
+exports.createEmailColumn1625764801579 = createEmailColumn1625764801579;
+//# sourceMappingURL=1625764801579-create email column.js.map

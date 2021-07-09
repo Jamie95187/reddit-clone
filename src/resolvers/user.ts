@@ -8,6 +8,8 @@ import { COOKIE_NAME } from '../constants';
 @InputType()
 class UsernamePasswordInput {
   @Field()
+  email: string;
+  @Field()
   username: string
   @Field()
   password: string
@@ -82,6 +84,17 @@ export class UserResolver {
             {
               field: "password",
               message: "length must be greater than 3",
+            },
+        ],
+      };
+    }
+
+    if (!options.email.includes('@')) {
+      return {
+          errors: [
+            {
+              field: "email",
+              message: "invalid email",
             },
         ],
       };

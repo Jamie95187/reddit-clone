@@ -34,6 +34,7 @@ type Query {
 
 type User {
   create_at: String!
+  email: String!
   id: Float!
   update_at: String!
   username: String!
@@ -45,6 +46,7 @@ type UserResponse {
 }
 
 input UsernamePasswordInput {
+  email: String!
   password: String!
   username: String!
 }
