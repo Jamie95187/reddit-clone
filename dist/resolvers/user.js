@@ -1,28 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const tslib_1 = require("tslib");
+var _a;
 const { Query, Resolver, Mutation, Arg, InputType, Field, ObjectType, Ctx } = require("type-graphql");
 const argon2 = require('argon2');
 const typeorm_1 = require("typeorm");
 const User_1 = require("../entity/User");
 const constants_1 = require("../constants");
-let UsernamePasswordInput = class UsernamePasswordInput {
-};
-tslib_1.__decorate([
-    Field(),
-    tslib_1.__metadata("design:type", String)
-], UsernamePasswordInput.prototype, "email", void 0);
-tslib_1.__decorate([
-    Field(),
-    tslib_1.__metadata("design:type", String)
-], UsernamePasswordInput.prototype, "username", void 0);
-tslib_1.__decorate([
-    Field(),
-    tslib_1.__metadata("design:type", String)
-], UsernamePasswordInput.prototype, "password", void 0);
-UsernamePasswordInput = tslib_1.__decorate([
-    InputType()
-], UsernamePasswordInput);
+const validateRegister_1 = require("../utils/validateRegister");
 let FieldError = class FieldError {
 };
 tslib_1.__decorate([
@@ -67,35 +52,9 @@ let UserResolver = class UserResolver {
     }
     createUser(options, { req }) {
         return tslib_1.__awaiter(this, void 0, void 0, function* () {
-            if (options.username.length <= 2) {
-                return {
-                    errors: [
-                        {
-                            field: "username",
-                            message: "length must be greater than 2",
-                        },
-                    ],
-                };
-            }
-            if (options.password.length <= 3) {
-                return {
-                    errors: [
-                        {
-                            field: "password",
-                            message: "length must be greater than 3",
-                        },
-                    ],
-                };
-            }
-            if (!options.email.includes('@')) {
-                return {
-                    errors: [
-                        {
-                            field: "email",
-                            message: "invalid email",
-                        },
-                    ],
-                };
+            const response = validateRegister_1.validateRegister(options);
+            if (errors) {
+                return { errors };
             }
             const hashedPassword = yield argon2.hash(options.password);
             let user = new User_1.User;
@@ -118,9 +77,11 @@ let UserResolver = class UserResolver {
             return { user };
         });
     }
-    login(options, { req }) {
+    login(usernameOrEmail, password, { req }) {
         return tslib_1.__awaiter(this, void 0, void 0, function* () {
-            const user = yield typeorm_1.getManager().findOne(User_1.User, { username: options.username });
+            const user = yield typeorm_1.getManager().findOne(User_1.User, usernameOrEmail.includes('@')
+                ? { email: usernameOrEmail }
+                : { username: usernameOrEmail });
             if (!user) {
                 return {
                     errors: [
@@ -131,7 +92,7 @@ let UserResolver = class UserResolver {
                     ],
                 };
             }
-            const valid = yield argon2.verify(user.password, options.password);
+            const valid = yield argon2.verify(user.password, password);
             if (!valid) {
                 return {
                     errors: [
@@ -181,15 +142,16 @@ tslib_1.__decorate([
     tslib_1.__param(0, Arg('options')),
     tslib_1.__param(1, Ctx()),
     tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", [UsernamePasswordInput, Object]),
+    tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof UsernamePasswordInput !== "undefined" && UsernamePasswordInput) === "function" ? _a : Object, Object]),
     tslib_1.__metadata("design:returntype", Promise)
 ], UserResolver.prototype, "createUser", null);
 tslib_1.__decorate([
     Mutation(() => UserResponse),
-    tslib_1.__param(0, Arg('options')),
-    tslib_1.__param(1, Ctx()),
+    tslib_1.__param(0, Arg('usernameOrEmail')),
+    tslib_1.__param(1, Arg("password")),
+    tslib_1.__param(2, Ctx()),
     tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", [UsernamePasswordInput, Object]),
+    tslib_1.__metadata("design:paramtypes", [String, String, Object]),
     tslib_1.__metadata("design:returntype", Promise)
 ], UserResolver.prototype, "login", null);
 tslib_1.__decorate([

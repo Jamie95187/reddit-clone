@@ -4,16 +4,7 @@ import { MyContext } from '../types';
 import { getManager } from 'typeorm';
 import { User } from '../entity/User';
 import { COOKIE_NAME } from '../constants';
-
-@InputType()
-class UsernamePasswordInput {
-  @Field()
-  email: string;
-  @Field()
-  username: string
-  @Field()
-  password: string
-}
+import { validateRegister } from "../utils/validateRegister";
 
 @ObjectType()
 class FieldError {
@@ -65,39 +56,9 @@ export class UserResolver {
     @Arg('options') options: UsernamePasswordInput,
     @Ctx() { req }: MyContext
   ): Promise<UserResponse> {
-
-    // Validation
-    if (options.username.length <= 2) {
-      return {
-          errors: [
-            {
-              field: "username",
-              message: "length must be greater than 2",
-            },
-        ],
-      };
-    }
-
-    if (options.password.length <= 3) {
-      return {
-          errors: [
-            {
-              field: "password",
-              message: "length must be greater than 3",
-            },
-        ],
-      };
-    }
-
-    if (!options.email.includes('@')) {
-      return {
-          errors: [
-            {
-              field: "email",
-              message: "invalid email",
-            },
-        ],
-      };
+    const response = validateRegister(options);
+    if (errors) {
+      return { errors };
     }
 
     const hashedPassword = await argon2.hash(options.password);
@@ -132,10 +93,15 @@ export class UserResolver {
 
   @Mutation(() => UserResponse)
   async login(
-    @Arg('options') options: UsernamePasswordInput,
+    @Arg('usernameOrEmail') usernameOrEmail: string,
+    @Arg("password") password: string,
     @Ctx() { req }: MyContext
   ): Promise<UserResponse> {
-    const user = await getManager().findOne(User, { username: options.username });
+    const user = await getManager().findOne(User,
+      usernameOrEmail.includes('@')
+        ? { email: usernameOrEmail }
+        : { username: usernameOrEmail }
+      );
     // User not found
     if (!user) {
       return {
@@ -148,7 +114,7 @@ export class UserResolver {
       };
     }
     // argon2 verify returns true or false
-    const valid = await argon2.verify(user.password, options.password);
+    const valid = await argon2.verify(user.password, password);
     if (!valid) {
       return {
         errors: [
