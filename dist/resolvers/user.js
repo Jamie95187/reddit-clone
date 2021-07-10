@@ -1,13 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const tslib_1 = require("tslib");
-var _a;
 const { Query, Resolver, Mutation, Arg, InputType, Field, ObjectType, Ctx } = require("type-graphql");
 const argon2 = require('argon2');
 const typeorm_1 = require("typeorm");
 const User_1 = require("../entity/User");
 const constants_1 = require("../constants");
 const validateRegister_1 = require("../utils/validateRegister");
+const UsernamePasswordInput_1 = require("./UsernamePasswordInput");
 let FieldError = class FieldError {
 };
 tslib_1.__decorate([
@@ -142,7 +142,7 @@ tslib_1.__decorate([
     tslib_1.__param(0, Arg('options')),
     tslib_1.__param(1, Ctx()),
     tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof UsernamePasswordInput !== "undefined" && UsernamePasswordInput) === "function" ? _a : Object, Object]),
+    tslib_1.__metadata("design:paramtypes", [UsernamePasswordInput_1.UsernamePasswordInput, Object]),
     tslib_1.__metadata("design:returntype", Promise)
 ], UserResolver.prototype, "createUser", null);
 tslib_1.__decorate([

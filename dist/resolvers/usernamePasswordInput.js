@@ -19,4 +19,5 @@ tslib_1.__decorate([
 UsernamePasswordInput = tslib_1.__decorate([
     type_graphql_1.InputType()
 ], UsernamePasswordInput);
+exports.UsernamePasswordInput = UsernamePasswordInput;
 //# sourceMappingURL=usernamePasswordInput.js.map

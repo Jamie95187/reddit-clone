@@ -5,6 +5,7 @@ import { getManager } from 'typeorm';
 import { User } from '../entity/User';
 import { COOKIE_NAME } from '../constants';
 import { validateRegister } from "../utils/validateRegister";
+import { UsernamePasswordInput } from "./UsernamePasswordInput";
 
 @ObjectType()
 class FieldError {
