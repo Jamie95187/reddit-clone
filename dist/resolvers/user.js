@@ -52,7 +52,7 @@ let UserResolver = class UserResolver {
     }
     createUser(options, { req }) {
         return tslib_1.__awaiter(this, void 0, void 0, function* () {
-            const response = validateRegister_1.validateRegister(options);
+            const errors = validateRegister_1.validateRegister(options);
             if (errors) {
                 return { errors };
             }
