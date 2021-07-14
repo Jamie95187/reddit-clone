@@ -58,6 +58,7 @@ let UserResolver = class UserResolver {
             }
             const hashedPassword = yield argon2.hash(options.password);
             let user = new User_1.User;
+            user.id = 1;
             user.username = options.username;
             user.password = hashedPassword;
             try {

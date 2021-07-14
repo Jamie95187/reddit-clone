@@ -65,7 +65,7 @@ export class UserResolver {
     const hashedPassword = await argon2.hash(options.password);
 
     let user = new User;
-    // user.id = 1;
+    user.id = 1;
     user.username = options.username;
     user.password = hashedPassword;
     try {
