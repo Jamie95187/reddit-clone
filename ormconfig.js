@@ -1,24 +1,24 @@
 module.exports = {
-   "type": "postgres",
-   "host": "localhost",
-   "port": 5432,
-   "username": "jamie",
-   "password": "test",
-   "database": "lireddit",
-   "synchronize": true,
-   "logging": false,
-   "entities": [
-     "dist/entity/**/*.{ts,js}"
+   type: "postgres",
+   host: "localhost",
+   port: 5432,
+   username: "jamie",
+   password: "test",
+   database: "lireddit",
+   synchronize: true,
+   logging: false,
+   entities: [
+      'src/entity/*.ts'
    ],
-   "migrations": [
-      "dist/migration/**/*.js"
+   migrations: [
+      'src/database/migrations/*.ts'
    ],
-   "subscribers": [
-      "dist/subscriber/**/*.js"
+   subscribers: [
+      "'src/entity/*.ts'"
    ],
-   "cli": {
+   cli: {
       "entitiesDir": "src/entity",
-      "migrationsDir": "src/migration",
+      "migrationsDir": "src/database/migrations",
       "subscribersDir": "src/subscriber"
    }
 }

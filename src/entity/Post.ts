@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from "typeorm";
+const { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } = require ("typeorm");
 const { ObjectType, Field } = require("type-graphql");
 
 // Declare object type when using with graphql
