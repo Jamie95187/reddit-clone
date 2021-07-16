@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.PostResolver = void 0;
 const tslib_1 = require("tslib");
 const { Resolver, Mutation, Query, Arg, Int } = require("type-graphql");
 const { getConnection } = require("typeorm");

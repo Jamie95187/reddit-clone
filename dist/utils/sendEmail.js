@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.sendEmail = void 0;
 const tslib_1 = require("tslib");
 const nodemailer_1 = tslib_1.__importDefault(require("nodemailer"));
 function sendEmail(to, html) {
