@@ -18,7 +18,6 @@ export class PostResolver {
   }
 
   // Mutations are for updating, inserting and deleting
-  // Mutations not configured in schema??!??!?!?!
 
   @Mutation(() => Post)
   async createPost(@Arg("title", () => String) title: string)
