@@ -8,6 +8,7 @@
       "dev": "nodemon dist/index.js",
       "start": "ts-node src/index.ts",
       "start2": "ts-node src/index.ts",
+      "clean": "rimraf dist",
       "typeorm": "ts-node --require ts-node/register ./node_modules/typeorm/cli.js",
       "migration:create": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:create"
    },
@@ -54,10 +55,12 @@
       "pg": "^8.6.0",
       "redis": "^3.1.2",
       "reflect-metadata": "^0.1.13",
+      "rimraf": "^3.0.2",
       "tslib": "^2.2.0",
       "ttypescript": "^1.5.12",
       "type-graphql": "^1.1.1",
       "typeorm": "^0.2.34",
-      "yargs": "^16.2.0"
+      "yargs": "^16.2.0",
+      "yarn": "^1.22.10"
    }
 }
