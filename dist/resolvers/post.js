@@ -1,32 +1,29 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.PostResolver = void 0;
-const tslib_1 = require("tslib");
-const { Resolver, Mutation, Query, Arg, Int } = require("type-graphql");
-const { getConnection } = require("typeorm");
-const Post_1 = require("../entity/Post");
+import { __awaiter, __decorate, __metadata, __param } from "tslib";
+import { Resolver, Mutation, Query, Arg, Int } from "type-graphql";
+import { getConnection } from "typeorm";
+import { Post } from "../entity/Post";
 let PostResolver = class PostResolver {
     posts() {
-        return tslib_1.__awaiter(this, void 0, void 0, function* () {
-            return getConnection().manager.find(Post_1.Post, {});
+        return __awaiter(this, void 0, void 0, function* () {
+            return getConnection().manager.find(Post, {});
         });
     }
     post(id) {
-        return getConnection().manager.findOne(Post_1.Post, { id });
+        return getConnection().manager.findOneOrFail(Post, { id });
     }
     createPost(title) {
-        return tslib_1.__awaiter(this, void 0, void 0, function* () {
-            const post = new Post_1.Post();
+        return __awaiter(this, void 0, void 0, function* () {
+            const post = new Post();
             post.title = title;
             yield getConnection().manager.save(post);
             return post;
         });
     }
     updatePost(id, title) {
-        return tslib_1.__awaiter(this, void 0, void 0, function* () {
+        return __awaiter(this, void 0, void 0, function* () {
             yield getConnection()
                 .createQueryBuilder()
-                .update(Post_1.Post)
+                .update(Post)
                 .set({
                 title: title
             })
@@ -36,54 +33,54 @@ let PostResolver = class PostResolver {
         });
     }
     deletePost(id) {
-        return tslib_1.__awaiter(this, void 0, void 0, function* () {
+        return __awaiter(this, void 0, void 0, function* () {
             yield getConnection()
                 .createQueryBuilder()
                 .delete()
-                .from(Post_1.Post)
+                .from(Post)
                 .where("id = :id", { id: id })
                 .execute();
             return true;
         });
     }
 };
-tslib_1.__decorate([
-    Query(() => [Post_1.Post]),
-    tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", []),
-    tslib_1.__metadata("design:returntype", Promise)
+__decorate([
+    Query(() => [Post]),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
 ], PostResolver.prototype, "posts", null);
-tslib_1.__decorate([
-    Query(() => Post_1.Post, { nullable: true }),
-    tslib_1.__param(0, Arg('id', () => Int)),
-    tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", [Number]),
-    tslib_1.__metadata("design:returntype", Promise)
+__decorate([
+    Query(() => Post, { nullable: true }),
+    __param(0, Arg('id', () => Int)),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", Promise)
 ], PostResolver.prototype, "post", null);
-tslib_1.__decorate([
-    Mutation(() => Post_1.Post),
-    tslib_1.__param(0, Arg("title", () => String)),
-    tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", [String]),
-    tslib_1.__metadata("design:returntype", Promise)
+__decorate([
+    Mutation(() => Post),
+    __param(0, Arg("title", () => String)),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
 ], PostResolver.prototype, "createPost", null);
-tslib_1.__decorate([
+__decorate([
     Mutation(() => String, { nullable: true }),
-    tslib_1.__param(0, Arg("id")),
-    tslib_1.__param(1, Arg("title", () => String, { nullable: true })),
-    tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", [String, String]),
-    tslib_1.__metadata("design:returntype", Promise)
+    __param(0, Arg("id")),
+    __param(1, Arg("title", () => String, { nullable: true })),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, String]),
+    __metadata("design:returntype", Promise)
 ], PostResolver.prototype, "updatePost", null);
-tslib_1.__decorate([
+__decorate([
     Mutation(() => Boolean),
-    tslib_1.__param(0, Arg("id")),
-    tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", [String]),
-    tslib_1.__metadata("design:returntype", Promise)
+    __param(0, Arg("id")),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
 ], PostResolver.prototype, "deletePost", null);
-PostResolver = tslib_1.__decorate([
+PostResolver = __decorate([
     Resolver()
 ], PostResolver);
-exports.PostResolver = PostResolver;
+export { PostResolver };
 //# sourceMappingURL=post.js.map

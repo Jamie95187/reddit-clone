@@ -1,7 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from "typeorm";
-const { ObjectType, Field } = require("type-graphql");
+const { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } = require("typeorm");
+import { ObjectType, Field } from "type-graphql";
 
-// Declare object type when using with graphql
 @ObjectType()
 @Entity()
 export class Post {

@@ -1,13 +1,12 @@
 {
   "compilerOptions": {
     "lib": [
-       "dom",
-       "es6",
-       "esnext.asynciterable",
-       "es2017"
+      "dom",
+      "es6",
+      "esnext.asynciterable",
+      "es2017"
     ],
     "target": "es6",
-    "module": "commonjs",
     "skipLibCheck": true,
     "sourceMap": true,
     "importHelpers": true,
@@ -31,13 +30,15 @@
     "resolveJsonModule": true,
     "baseUrl": ".",
     "paths": {
-        "*": [
-            "node_modules/*",
-            "app/types/*"
-        ]
+      "*": [
+        "node_modules/*",
+        "app/types/*"
+      ]
     }
   },
-  "exclude": ["./node_modules"],
+  "exclude": [
+    "./node_modules"
+  ],
   "include": [
     "./src/**/*.tsx",
     "./src/**/*.ts",

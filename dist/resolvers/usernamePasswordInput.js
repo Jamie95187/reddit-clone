@@ -1,24 +1,21 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.UsernamePasswordInput = void 0;
-const tslib_1 = require("tslib");
+import { __decorate, __metadata } from "tslib";
 const { InputType, Field } = require("type-graphql");
 let UsernamePasswordInput = class UsernamePasswordInput {
 };
-tslib_1.__decorate([
+__decorate([
     Field(),
-    tslib_1.__metadata("design:type", String)
+    __metadata("design:type", String)
 ], UsernamePasswordInput.prototype, "email", void 0);
-tslib_1.__decorate([
+__decorate([
     Field(),
-    tslib_1.__metadata("design:type", String)
+    __metadata("design:type", String)
 ], UsernamePasswordInput.prototype, "username", void 0);
-tslib_1.__decorate([
+__decorate([
     Field(),
-    tslib_1.__metadata("design:type", String)
+    __metadata("design:type", String)
 ], UsernamePasswordInput.prototype, "password", void 0);
-UsernamePasswordInput = tslib_1.__decorate([
+UsernamePasswordInput = __decorate([
     InputType()
 ], UsernamePasswordInput);
-exports.UsernamePasswordInput = UsernamePasswordInput;
+export { UsernamePasswordInput };
 //# sourceMappingURL=UsernamePasswordInput.js.map

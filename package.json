@@ -3,6 +3,7 @@
    "version": "1.0.0",
    "description": "",
    "main": "index.js",
+   "type": "module",
    "scripts": {
       "watch": "ttsc -w",
       "dev": "nodemon dist/index.js",
@@ -40,6 +41,7 @@
       "@emotion/react": "11",
       "@emotion/styled": "11",
       "apollo-server": "^2.23.0",
+      "apollo-server-express": "^3.0.2",
       "argon2": "^0.27.2",
       "class-validator": "^0.13.1",
       "connect-pg-simple": "^6.2.1",

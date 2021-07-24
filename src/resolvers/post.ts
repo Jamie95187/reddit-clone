@@ -1,5 +1,5 @@
-const { Resolver, Mutation, Query, Arg, Int } = require("type-graphql");
-const { getConnection} = require ("typeorm");
+import { Resolver, Mutation, Query, Arg, Int } from "type-graphql";
+import { getConnection } from "typeorm";
 import { Post } from "../entity/Post";
 
 @Resolver()
@@ -14,7 +14,7 @@ export class PostResolver {
 
   @Query(() => Post, { nullable: true })
   post(@Arg('id', () => Int) id: number): Promise<Post | null> {
-    return getConnection().manager.findOne(Post, {id});
+    return getConnection().manager.findOneOrFail(Post, {id});
   }
 
   // Mutations are for updating, inserting and deleting
