@@ -1,13 +1,13 @@
 import "reflect-metadata";
-import { createConnection, getConnection } from "typeorm";
+import { createConnection } from "typeorm";
 import express from 'express';
 import { PostResolver } from "./resolvers/post";
 import { UserResolver } from "./resolvers/user";
 import redis from 'redis';
 import session from 'express-session';
 import connectRedis from 'connect-redis';
-const { buildSchema } = require('type-graphql');
-const { ApolloServer } = require('apollo-server-express');
+import { buildSchema } from 'type-graphql';
+const { ApolloServer } =require ('apollo-server-express');
 import cors from 'cors';
 import { COOKIE_NAME } from './constants';
 
@@ -15,12 +15,6 @@ import { COOKIE_NAME } from './constants';
 // near the package.json (root directory)
 
 createConnection().then(async connection => {
-
-    // await getConnection()
-    //   .createQueryBuilder()
-    //   .delete()
-    //   .from(User)
-    //   .execute();
 
     const app = express();
 

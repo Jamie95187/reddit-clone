@@ -1,6 +1,6 @@
 import { __decorate, __metadata } from "tslib";
-const { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } = require("typeorm");
 import { ObjectType, Field } from "type-graphql";
+import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 let Post = class Post {
 };
 __decorate([

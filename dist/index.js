@@ -7,7 +7,7 @@ import { UserResolver } from "./resolvers/user";
 import redis from 'redis';
 import session from 'express-session';
 import connectRedis from 'connect-redis';
-const { buildSchema } = require('type-graphql');
+import { buildSchema } from 'type-graphql';
 const { ApolloServer } = require('apollo-server-express');
 import cors from 'cors';
 import { COOKIE_NAME } from './constants';
