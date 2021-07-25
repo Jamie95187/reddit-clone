@@ -8,7 +8,7 @@ import redis from 'redis';
 import session from 'express-session';
 import connectRedis from 'connect-redis';
 import { buildSchema } from 'type-graphql';
-const { ApolloServer } = require('apollo-server-express');
+import { ApolloServer } from 'apollo-server-express';
 import cors from 'cors';
 import { COOKIE_NAME } from './constants';
 createConnection().then((connection) => __awaiter(void 0, void 0, void 0, function* () {
