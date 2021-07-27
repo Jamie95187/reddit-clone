@@ -51,4 +51,3 @@ createConnection().then((connection) => __awaiter(void 0, void 0, void 0, functi
         console.log('server started on localhost:8080');
     });
 })).catch(error => console.log(error));
-//# sourceMappingURL=index.js.map
