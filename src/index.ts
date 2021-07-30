@@ -1,13 +1,13 @@
 import "reflect-metadata";
 import { createConnection } from "typeorm";
 import express from 'express';
-import { PostResolver } from "./resolvers/post";
-import { UserResolver } from "./resolvers/user";
+// import { PostResolver } from "./resolvers/post";
+// import { UserResolver } from "./resolvers/user";
 import redis from 'redis';
 import session from 'express-session';
 import connectRedis from 'connect-redis';
 import { buildSchema } from 'type-graphql';
-import { ApolloServer } from 'apollo-server-express';
+
 import cors from 'cors';
 import { COOKIE_NAME } from './constants';
 
@@ -37,28 +37,29 @@ createConnection().then(async connection => {
       })
     );
 
-    app.use(
-      session({
-        name: COOKIE_NAME,
-        store: new RedisStore({
-          client: redisClient,
-          disableTouch: true
-         }),
-         cookie: {
-           maxAge: 1000 * 60 * 60 * 24 * 365 * 10, // 10 years
-           httpOnly: true,
-           sameSite: 'lax', // csrf
-           secure: false, // cookie only works in https
-         },
-        saveUninitialized: false,
-        secret: 'qwewqeqqadsdqwdasdadq',
-        resave: false,
-      })
-    )
+    // app.use(
+    //   session({
+    //     name: COOKIE_NAME,
+    //     store: new RedisStore({
+    //       client: redisClient,
+    //       disableTouch: true
+    //      }),
+    //      cookie: {
+    //        maxAge: 1000 * 60 * 60 * 24 * 365 * 10, // 10 years
+    //        httpOnly: true,
+    //        sameSite: 'lax', // csrf
+    //        secure: false, // cookie only works in https
+    //      },
+    //     saveUninitialized: false,
+    //     secret: 'qwewqeqqadsdqwdasdadq',
+    //     resave: false,
+    //   })
+    // )
 
     const apolloServer = new ApolloServer({
       schema: await buildSchema({
-        resolvers: [PostResolver, UserResolver],
+        resolvers: [PostResolver],
+        // resolvers: [PostResolver, UserResolver],
         emitSchemaFile: true,
         validate: false
       }),
@@ -75,3 +76,86 @@ createConnection().then(async connection => {
     })
 
 }).catch(error => console.log(error));
+
+import { Resolver, Mutation, Query, Arg, Int } from "type-graphql";
+import { getConnection } from "typeorm";
+
+import { ApolloServer } from "apollo-server-express";
+
+@Resolver()
+export class PostResolver {
+
+  // Queries are used for getting data
+
+  @Query(() => [Post])
+  async posts(): Promise<Post[]> {
+    return getConnection().manager.find(Post, {});
+  }
+
+  @Query(() => Post, { nullable: true })
+  post(@Arg('id', () => Int) id: number): Promise<Post | null> {
+    return getConnection().manager.findOneOrFail(Post, {id});
+  }
+
+  // Mutations are for updating, inserting and deleting
+
+  @Mutation(() => Post)
+  async createPost(@Arg("title", () => String) title: string)
+  {
+     const post = new Post();
+     post.title = title;
+     await getConnection().manager.save(post);
+     return post;
+  }
+
+  @Mutation(() => String, {nullable: true})
+  async updatePost(
+    @Arg("id") id: string,
+    @Arg("title", () => String, { nullable: true }) title: string) {
+     await getConnection()
+     .createQueryBuilder()
+     .update(Post)
+     .set({
+       title: title
+     })
+     .where("id = :id", { id: id })
+     .execute();
+     return "Success";
+  }
+
+  @Mutation(() => Boolean)
+  async deletePost(
+    @Arg("id") id: string) {
+     await getConnection()
+     .createQueryBuilder()
+     .delete()
+     .from(Post)
+     .where("id = :id", { id: id })
+     .execute();
+     return true;
+  }
+}
+
+import { ObjectType, Field } from "type-graphql";
+import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+
+@ObjectType()
+@Entity()
+export class Post {
+    @Field(() => Number)
+    @PrimaryGeneratedColumn()
+    id: Number;
+
+    @Field(() => String)
+    @CreateDateColumn()
+    create_at: Date;
+
+    @Field(() => String)
+    @UpdateDateColumn()
+    update_at: Date;
+
+    @Field()
+    @Column()
+    title: string;
+
+}
