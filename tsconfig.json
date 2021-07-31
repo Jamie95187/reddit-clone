@@ -4,7 +4,7 @@
       "dom",
       "es6",
       "esnext.asynciterable",
-      "es2016"
+      "es2017"
     ],
     "target": "es6",
     "skipLibCheck": true,
