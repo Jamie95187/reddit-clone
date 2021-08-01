@@ -37,25 +37,6 @@ createConnection().then(async connection => {
       })
     );
 
-    // app.use(
-    //   session({
-    //     name: COOKIE_NAME,
-    //     store: new RedisStore({
-    //       client: redisClient,
-    //       disableTouch: true
-    //      }),
-    //      cookie: {
-    //        maxAge: 1000 * 60 * 60 * 24 * 365 * 10, // 10 years
-    //        httpOnly: true,
-    //        sameSite: 'lax', // csrf
-    //        secure: false, // cookie only works in https
-    //      },
-    //     saveUninitialized: false,
-    //     secret: 'qwewqeqqadsdqwdasdadq',
-    //     resave: false,
-    //   })
-    // )
-
     const apolloServer = new ApolloServer({
       schema: await buildSchema({
         resolvers: [PostResolver],
