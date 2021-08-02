@@ -39,8 +39,7 @@ createConnection().then(async connection => {
 
     const apolloServer = new ApolloServer({
       schema: await buildSchema({
-        resolvers: [PostResolver],
-        // resolvers: [PostResolver, UserResolver],
+        resolvers: [PostResolver, UserResolver],
         emitSchemaFile: true,
         validate: false
       }),
@@ -119,6 +118,7 @@ export class PostResolver {
 
 import { ObjectType, Field } from "type-graphql";
 import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { UserResolver } from "./resolvers/user";
 
 @ObjectType()
 @Entity()
