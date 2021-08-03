@@ -1,4 +1,4 @@
-const { InputType, Field } = require("type-graphql");
+import { InputType, Field } from "type-graphql";
 
 @InputType()
 export class UsernamePasswordInput {
