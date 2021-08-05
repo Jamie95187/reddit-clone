@@ -9,8 +9,6 @@ import connectRedis from 'connect-redis';
 import { buildSchema } from 'type-graphql';
 
 import cors from 'cors';
-import { COOKIE_NAME } from './constants';
-
 // Unlike mikroOrm, the createConnection function automatically finds the ormconfig.json file as long as it is
 // near the package.json (root directory)
 
